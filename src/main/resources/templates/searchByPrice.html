@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Deleting of position</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Введите цену менее которой нужно вывести все телевизоры.</h1>
+<form action="#" th:action="@{/search/by/price}" th:object="${tvEntity}"  method="post">
+    <p>Id: <input type="text" th:field="*{price}" /></p>
+    <p><input type="submit" value="Подтвердить"></p>
+</form>
+</body>
+</html>
