@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div class="tvlist" th:unless="${#lists.isEmpty(tvEntity)}">
+<div class="tvlist" th:unless="${#lists.isEmpty(tvEntities)}">
     <h1>Results</h1>
     <table>
         <thead>
@@ -21,7 +21,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="tvEntity : ${tvEntity}">
+        <tr th:each="tvEntity : ${tvEntities}">
             <td th:text="${tvEntity.getId()}"></td>
             <td th:text="${tvEntity.getName()}"></td>
             <td th:text="${tvEntity.getType()}"></td>

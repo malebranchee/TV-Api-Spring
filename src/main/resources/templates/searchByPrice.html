@@ -7,7 +7,8 @@
 <body>
 <h1>Введите цену менее которой нужно вывести все телевизоры.</h1>
 <form action="#" th:action="@{/search/by/price}" th:object="${tvEntity}"  method="post">
-    <p>Id: <input type="text" th:field="*{price}" /></p>
+    <p>Id: <input type="number" th:field="*{price}" /></p>
+    <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error</div>
     <p><input type="submit" value="Подтвердить"></p>
 </form>
 </body>

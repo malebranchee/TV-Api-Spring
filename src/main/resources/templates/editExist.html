@@ -12,25 +12,26 @@
     <p th:text="'ID: ' + ${tvEntity.id}"/>
     <p><input type="hidden" th:field="*{id}" /></p>
     <p>Name: <input type="text" th:field="*{name}" /></p>
-
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
 
     <p>Type: <input type="text" th:field="*{type}" /></p>
-
+    <div th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Error</div>
 
 
     <p>Brand: <input type="text" th:field="*{brand}" /></p>
+    <div th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Error</div>
 
 
-
-    <p>Size: <input type="text" th:field="*{size}" /></p>
-
-
-
-    <p>Price: <input type="text" th:field="*{price}" /></p>
+    <p>Size: <input type="number" th:field="*{size}" /></p>
+    <div th:if="${#fields.hasErrors('size')}"  th:errorclass="" th:errors="*{size}">Error</div>
 
 
+    <p>Price: <input type="number" th:field="*{price}" /></p>
+    <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error</div>
 
-    <p>Quantity: <input type="text" th:field="*{quantity}" /></p>
+
+    <p>Quantity: <input type="number" th:field="*{quantity}" /></p>
+    <div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Error</div>
     <p><input type="submit" value="Подтвердить"   /> <input type="reset" value="Обновить"  /></p>
 </form>
 </body>

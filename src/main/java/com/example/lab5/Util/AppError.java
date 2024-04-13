@@ -1,4 +1,4 @@
-package com.example.lab5;
+package com.example.lab5.Util;
 
 import lombok.Data;
 
