@@ -1,16 +1,15 @@
-package com.example.lab5;
+package com.example.lab5.Services;
 
-import jakarta.transaction.Transactional;
+import com.example.lab5.Repositories.Entities.TvEntity;
+import com.example.lab5.Repositories.TvRepository;
+import com.example.lab5.Util.AppError;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.authenticator.BasicAuthenticator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
