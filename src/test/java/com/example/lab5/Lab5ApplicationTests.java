@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.example.lab5.Controllers.TvController;
+import com.example.lab5.Controllers.TvUserController;
 import com.example.lab5.Repositories.Entities.TvEntity;
 import com.example.lab5.Services.TvService;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ import java.util.List;
 
 
 @ContextConfiguration(classes = Lab5Application.class)
-@WebMvcTest(TvController.class)
+@WebMvcTest(TvUserController.class)
 class TestingWebApplicationTest {
 
     @Autowired

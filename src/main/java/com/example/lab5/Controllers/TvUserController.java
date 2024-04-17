@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
-public class TvController {
+@RequestMapping("/api")
+public class TvUserController {
     @NonNull
     private final TvService tvService;
 
@@ -25,69 +26,7 @@ public class TvController {
         return "tv";
     }
 
-    @PostMapping("/add")
-    public String addTv(   @ModelAttribute  @Valid TvEntity tvEntity, BindingResult bindingResult){
 
-        if (bindingResult.hasErrors()) {
-            return "add";
-        }
-        tvService.addTv(tvEntity);
-        return "addResult";
-    }
-
-    @GetMapping("/add")
-    public String addTvResult(Model model){
-        model.addAttribute("tvEntity", new TvEntity());
-        return "add";
-    }
-
-    @PostMapping("/delete")
-    public String deleteTv(@ModelAttribute  TvEntity tvEntity, BindingResult bindingResult, Model model){
-
-        @Valid int id = tvEntity.getId();
-        model.addAttribute("tvId", id);
-        if (bindingResult.hasErrors()) {
-            return "delete";
-        }
-
-         if (tvService.existsTv(tvEntity.getId())) {
-             tvService.deleteTv(tvEntity.getId());
-             return "deleteResult";
-         }
-             return "deleteNoResult";
-    }
-
-    @GetMapping("/delete")
-    public String deleteTvResult(Model model){
-        model.addAttribute("tvEntity", new TvEntity());
-        return "delete";
-    }
-
-    @GetMapping("/edit")
-    public String updateTv(Model model){
-
-        model.addAttribute("tvEntity", new TvEntity());
-
-        return "checkConditionEdit";
-    }
-
-    @PostMapping("/edit")
-    public String editTv(@ModelAttribute  TvEntity tvEntity,BindingResult bindingResult ,Model model){
-        model.addAttribute("tvId", tvEntity.getId());
-        if (bindingResult.hasErrors()) {
-            return "checkConditionEdit";
-        }
-        if (tvService.existsTv(tvEntity.getId())) {
-            model.addAttribute("tvEntity", tvService.loadUserById(tvEntity.getId()));
-            return "editExist";
-        }
-        return "add";
-    }
-    @PostMapping("/edit/successful")
-    public String editTvSuccess(@ModelAttribute TvEntity tvEntity, Model model){
-        model.addAttribute("tvEntity", tvService.saveTv(tvEntity));
-        return "editSuccessful";
-    }
 
     @GetMapping("/search")
     public String searchTvResult(Model model){

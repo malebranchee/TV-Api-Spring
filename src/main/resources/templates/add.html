@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Форма добавления новой/несуществующей позиции</h1>
-<form  action="#" th:action="@{/add}"   th:object="${tvEntity}" method="post">
+<form  action="#" th:action="@{/api/admin/add}"   th:object="${tvEntity}" method="post">
 
     <p>Name: <input type="text" th:field="*{name}" required/></p>
     <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
