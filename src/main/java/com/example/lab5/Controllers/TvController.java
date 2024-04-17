@@ -3,7 +3,7 @@ package com.example.lab5.Controllers;
 
 import com.example.lab5.Repositories.Entities.TvEntity;
 import com.example.lab5.Services.TvService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
