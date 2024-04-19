@@ -4,6 +4,7 @@ import com.example.lab5.Repositories.Entities.TvEntity;
 import com.example.lab5.Services.TvService;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/api/admin")
 @AllArgsConstructor
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class TvAdminController {
     @NonNull
     private final TvService tvService;

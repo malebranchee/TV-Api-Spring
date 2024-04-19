@@ -5,16 +5,18 @@
     <title>Регистрация</title>
 </head>
 <body>
+<p th:if="${registrationError}" class="error">Wrong user or password</p>
 <form class="form" action="#" method="post" th:object="${userForm}" th:action="@{/registration}">
-    <input class="input" type="text" placeholder="Ваше имя" th:field="*{username}">
-    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</p>
+    <input class="input" type="text" placeholder="Ваше имя" th:field="*{username}" name="username">
 
+    <input class="input" type="password" placeholder="Пароль" th:field="*{password}" name="password">
+    <input class="input" type="password" placeholder="Пароль еще раз" th:field="*{passwordConfirm}" name="passwordConfirm">
 
-    <input class="input" type="password" placeholder="Пароль" th:field="*{password}">
-    <input class="input" type="password" placeholder="Пароль еще раз" th:field="*{passwordConfirm}">
-    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</p>
-
-
+    <div th:if="${#fields.hasAnyErrors()}">
+        <ul>
+            <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </ul>
+    </div>
     <button class="btn" type="submit">Регистрация</button>
 
 </form>
