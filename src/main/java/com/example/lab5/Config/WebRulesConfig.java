@@ -28,18 +28,10 @@ public class WebRulesConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf()
-                .disable()
                 .authorizeRequests()
-                //Доступ только для не зарегистрированных пользователей
-                .antMatchers("/registration").not().fullyAuthenticated()
-                //Доступ только для пользователей с ролью Администратор
+                .antMatchers("/", "/registration", "/login").not().authenticated()
+                .antMatchers("/api/**").hasRole("USER")
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
-                .antMatchers("/api").hasRole("USER")
-                //Доступ разрешен всем пользователей
-                .antMatchers("/").permitAll()
-                //Все остальные страницы требуют аутентификации
-                .anyRequest().authenticated()
                 .and()
                 //Настройка для входа в систему
                 .formLogin()
@@ -47,11 +39,11 @@ public class WebRulesConfig {
                 .failureForwardUrl("/login-error")
                 //Перенарпавление на главную страницу после успешного входа
                 .defaultSuccessUrl("/api")
-                .permitAll()
                 .and()
                 .logout()
                 .permitAll()
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+                .permitAll();
 
         return httpSecurity.build();
     }

@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Введите ID для редактирования</h1>
-<form action="#" th:action="@{/edit}" th:object="${tvEntity}"  method="post">
+<form action="#" th:action="@{/api/admin/edit}" th:object="${tvEntity}"  method="post">
     <p>Id: <input type="number" th:field="*{id}" /></p>
     <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Error</div>
     <p><input type="submit" value="Подтвердить"></p>

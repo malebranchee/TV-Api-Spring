@@ -31,14 +31,11 @@ public class AuthorizationController {
     @PostMapping("/registration")
     public String addUser(@ModelAttribute @Valid UserDto userdto, BindingResult bindingResult, Model model) {
 
-
         if (!userdto.getPassword().equals(userdto.getPasswordConfirm())){
             bindingResult.addError(new ObjectError("passwordError", "Passwords do not match"));
-
         }
         if (userService.existsByUsername(userdto.getUsername())){
             bindingResult.addError(new ObjectError("usernameError", "Username is already in use"));
-
         }
         if (bindingResult.hasErrors()) {
             return "registration";
