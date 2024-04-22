@@ -24,14 +24,12 @@ public class User implements UserDetails {
     private Long id;
 
     @Setter
-    @Getter
     @Column(name = "login")
     @Size(min=2, message = "Не меньше 2 знаков")
     @NotBlank(message = "Поле не должно содержать символы пробелы!")
     private String username;
 
     @Setter
-    @Getter
     @Column(name = "password")
     @Size(min=2, message = "Не меньше 2 знаков")
     @NotBlank(message = "Пароль не может содержать пробелы!")

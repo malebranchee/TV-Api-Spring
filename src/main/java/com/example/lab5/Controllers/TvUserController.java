@@ -70,7 +70,6 @@ public class TvUserController {
 
             return "searchByPriceNoResult";
         }
-
         return "searchByPriceResult";
     }
 

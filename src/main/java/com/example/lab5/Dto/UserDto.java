@@ -4,17 +4,29 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+
+@Getter
+@Setter
 @Data
 public class UserDto {
-    @Getter
-    @Setter
+
+    public interface registration{
+
+    }
+    public interface login{
+
+    }
+
+    @NotNull(groups = {registration.class, login.class}, message = "Поле не должно быть пустым!")
     private String username;
 
-    @Getter
-    @Setter
+
+    @NotNull(groups = {registration.class, login.class}, message = "Поле не должно быть пустым!")
     private String password;
 
-    @Getter
-    @Setter
+
+    @NotNull(groups = {registration.class}, message = "Поле не должно быть пустым!")
     private String passwordConfirm;
 }

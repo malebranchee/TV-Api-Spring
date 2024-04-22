@@ -27,45 +27,30 @@ public class UserService implements UserDetailsService {
     UserRepository userRepository;
     @Autowired
     RoleRepository roleRepository;
-
-    @Lazy
     @Autowired
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public BCryptPasswordEncoder getBCryptPasswordEncoder() {
-        return bCryptPasswordEncoder;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username)  throws UsernameNotFoundException{
-        User user = new User();
-        if (existsByUsername(username)) {
-            user = userRepository.findByUsername(username).get();
+        if (userRepository.findByUsername(username).isPresent()){
+            return userRepository.findByUsername(username).get();
+        } else{
+            throw new UsernameNotFoundException(username);
         }
-        return user;
     }
 
 
 
-    public boolean existsByUsername(String username) {
-
-        return roleRepository.findByName(username).isPresent();
-    }
 
     public boolean saveUser(UserDto userdto) {
-
-        if (existsByUsername(userdto.getUsername())) {
-             return false;
+        if (userRepository.findByUsername(userdto.getUsername()).isPresent()){
+            return false;
         }
-
         User user = new User();
         user.setUsername(userdto.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(userdto.getPassword()));
-        if (roleRepository.findByName("ROLE_USER").isPresent()){
-            user.addRole(roleRepository.findByName("ROLE_USER").get());
-        } else {
-            user.addRole(new Role(1L, "ROLE_USER"));
-        }
+        user.addRole(roleRepository.findByName("ROLE_USER").get());
         userRepository.save(user);
         return true;
     }
