@@ -23,7 +23,6 @@ public class TvAdminController {
     @NonNull
     private final TvService tvService;
 
-
     @GetMapping("/tv")
     public String getAllTv(@ModelAttribute TvEntity tvEntity, Model model){
         model.addAttribute("tvEntities",  tvService.getAllTv());

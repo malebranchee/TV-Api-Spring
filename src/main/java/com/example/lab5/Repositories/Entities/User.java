@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
@@ -26,12 +27,14 @@ public class User implements UserDetails {
     @Getter
     @Column(name = "login")
     @Size(min=2, message = "Не меньше 2 знаков")
+    @NotBlank(message = "Поле не должно содержать символы пробелы!")
     private String username;
 
     @Setter
     @Getter
     @Column(name = "password")
     @Size(min=2, message = "Не меньше 2 знаков")
+    @NotBlank(message = "Пароль не может содержать пробелы!")
     private String password;
 
     @Setter

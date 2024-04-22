@@ -4,11 +4,11 @@ import com.example.lab5.Repositories.Entities.Role;
 import com.example.lab5.Repositories.Entities.User;
 import com.example.lab5.Repositories.RoleRepository;
 import com.example.lab5.Repositories.UserRepository;
-import com.example.lab5.UserDto;
+import com.example.lab5.Dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,9 +17,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -40,9 +37,9 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username)  throws UsernameNotFoundException{
         User user = new User();
-        if (userRepository.findByUsername(username).isPresent()) {
+        if (existsByUsername(username)) {
             user = userRepository.findByUsername(username).get();
         }
         return user;
@@ -51,13 +48,14 @@ public class UserService implements UserDetailsService {
 
 
     public boolean existsByUsername(String username) {
+
         return roleRepository.findByName(username).isPresent();
     }
 
     public boolean saveUser(UserDto userdto) {
 
-        if (userRepository.findByUsername(userdto.getUsername()).isPresent()) {
-            return false;
+        if (existsByUsername(userdto.getUsername())) {
+             return false;
         }
 
         User user = new User();
