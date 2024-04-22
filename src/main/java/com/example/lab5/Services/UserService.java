@@ -1,14 +1,12 @@
 package com.example.lab5.Services;
 
-import com.example.lab5.Repositories.Entities.Role;
+
 import com.example.lab5.Repositories.Entities.User;
 import com.example.lab5.Repositories.RoleRepository;
 import com.example.lab5.Repositories.UserRepository;
 import com.example.lab5.Dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
