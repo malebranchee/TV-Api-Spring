@@ -16,33 +16,24 @@ import static java.util.Objects.isNull;
 
 @Entity
 @Table(name = "users")
+@Setter
+@Getter
 public class User implements UserDetails {
-    @Setter
-    @Getter
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter
     @Column(name = "login")
-    @Size(min=2, message = "Не меньше 2 знаков")
-    @NotBlank(message = "Поле не должно содержать символы пробелы!")
     private String username;
 
-    @Setter
     @Column(name = "password")
-    @Size(min=2, message = "Не меньше 2 знаков")
-    @NotBlank(message = "Пароль не может содержать пробелы!")
     private String password;
 
-    @Setter
-    @Getter
     @Column(name = "passwordConfirm")
     @Transient
     private String passwordConfirm;
 
-    @Setter
-    @Getter
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "roles_x_users",
@@ -54,14 +45,6 @@ public class User implements UserDetails {
         if (isNull(roles))
             roles = new HashSet<Role>();
         roles.add(role);
-    }
-
-    public void deleteRole(Role role) {
-        roles.remove(role);
-    }
-
-    public void deleteAllRoles() {
-        roles.clear();
     }
 
     public User() {

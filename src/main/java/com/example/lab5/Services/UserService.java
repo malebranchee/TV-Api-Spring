@@ -40,7 +40,9 @@ public class UserService implements UserDetailsService {
         }
     }
 
-
+    public boolean existsByUsername(String username){
+        return userRepository.findByUsername(username).isPresent();
+    }
 
 
     public boolean saveUser(UserDto userdto) {
