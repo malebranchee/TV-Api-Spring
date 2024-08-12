@@ -1,23 +1,27 @@
 package com.example.lab5.Controllers;
 
-
 import com.example.lab5.Repositories.Entities.TvEntity;
 import com.example.lab5.Services.TvService;
-import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 
-@RequiredArgsConstructor
 @Controller
-public class TvController {
+@RequestMapping("/api/admin")
+@AllArgsConstructor
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+public class TvAdminController {
     @NonNull
     private final TvService tvService;
-
 
     @GetMapping("/tv")
     public String getAllTv(@ModelAttribute TvEntity tvEntity, Model model){
@@ -26,7 +30,7 @@ public class TvController {
     }
 
     @PostMapping("/add")
-    public String addTv(   @ModelAttribute  @Valid TvEntity tvEntity, BindingResult bindingResult){
+    public String addTv(@ModelAttribute  @Valid TvEntity tvEntity, BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
             return "add";
@@ -50,11 +54,11 @@ public class TvController {
             return "delete";
         }
 
-         if (tvService.existsTv(tvEntity.getId())) {
-             tvService.deleteTv(tvEntity.getId());
-             return "deleteResult";
-         }
-             return "deleteNoResult";
+        if (tvService.existsTv(tvEntity.getId())) {
+            tvService.deleteTv(tvEntity.getId());
+            return "deleteResult";
+        }
+        return "deleteNoResult";
     }
 
     @GetMapping("/delete")

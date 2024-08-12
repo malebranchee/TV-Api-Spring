@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Форма изменения</h1>
-<form  action="#" th:action="@{/edit/successful}" th:object="${tvEntity}" method="post">
+<form  action="#" th:action="@{/api/admin/edit/successful}" th:object="${tvEntity}" method="post">
     <p>Введите данные для изменения</p>
 
     <p th:text="'ID: ' + ${tvEntity.id}"/>
